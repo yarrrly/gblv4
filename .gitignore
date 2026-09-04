@@ -1,0 +1,9 @@
+# Firmware images are never committed; tests download them from the DCL.
+*.ota
+*.gbl
+*.bin
+*.s37
+*.hex
+__pycache__/
+*.pyc
+.dcl-cache/
