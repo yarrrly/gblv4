@@ -7,14 +7,17 @@ publishes it through the CSA Distributed Compliance Ledger (DCL). It is one
 Python script on the standard library; the optional `cryptography` package
 adds the two ECDSA checks.
 
-The format is documented on docs.silabs.com, but no open parser for it
-turned up: universal-silabs-flasher reads the GBL v3 header tag only, and a
-GitHub code search for the v4 tag 0x84A617EB finds it in no other tool. The
-Silicon Labs tooling is Simplicity Commander, which is closed, plus SDK
-sources under the MSLA. This script was written from the public format page
-and the public bootloader API reference, without reading SDK source. The
-section "Sources, and what they leave out" lists every field width that had
-to be inferred from real files instead.
+The format is documented on docs.silabs.com. The one open implementation
+found, [zigpy/pygbl](https://github.com/zigpy/pygbl) (Apache-2.0, August
+2026), is a library that parses and re-serialises GBL v4 byte for byte, with
+tag layouts taken from the SDK's Series 3 parser; it does not check the
+hashes or signatures of a v4 file, decompress its sections, read the Matter
+header, or offer a command line. The Silicon Labs tooling is Simplicity
+Commander, which is closed, plus SDK sources under the MSLA. This script
+covers the verification side from the public format page and the public
+bootloader API reference, without reading SDK source. The section "Sources,
+and what they leave out" lists every field width that had to be inferred
+from real files instead.
 
 The second half of this file is a case study: what the 18 IKEA KAJPLATS
 images in the DCL contain, checked against a lamp on a bench.
