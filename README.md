@@ -485,9 +485,14 @@ ClusterRevision values, 59 attribute records in all. The stack
 configuration in the image gives a scene table of 12 entries, a binding
 table of 18, an address table of 4 and a Green Power proxy table of 5. The
 lamp confirmed 12 scenes (the thirteenth store did not raise the count).
-The reporting table in the image has 12 slots of 20 bytes, yet the lamp
-accepted 14 configured reports before answering INSUFFICIENT_SPACE; where
-the extra two live is an open question. Touchlink policy at init is
+The reporting table in the image has 12 slots of 20 bytes, and the lamp
+holds 12. Clearing the table first, then configuring distinct attributes
+one at a time, the thirteenth answers INSUFFICIENT_SPACE; the count is the
+same on a second run after clearing again, and five preloaded entries leave
+room for exactly seven more. Reconfiguring an attribute that is already in
+the table does not take another slot. An earlier run of mine reported 14
+because it assumed three entries were already configured without checking.
+Touchlink policy at init is
 0x07: enabled, target role, stealing allowed, remote reset not allowed;
 primary channel mask 0x02108800 (channels 11, 15, 20, 25).
 
